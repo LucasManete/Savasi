@@ -9,26 +9,26 @@ import { Repository } from 'typeorm';
 export class CostumersService {
   constructor(
     @InjectRepository(Costumer)
-    private usersRepository: Repository<Costumer>,
+    private costumerRepository: Repository<Costumer>,
   ) {}
 
   async create(createCostumerDto: CreateCostumerDto): Promise<Costumer> {
-    return this.usersRepository.create(createCostumerDto);
+    return this.costumerRepository.save(createCostumerDto);
   }
 
   findAll() {
-    return this.usersRepository.find();
+    return this.costumerRepository.find();
   }
 
   findOne(id: string): Promise<Costumer> {
-    return this.usersRepository.findOneBy({ id });
+    return this.costumerRepository.findOne({ where: { id } });
   }
 
-  update(id: string, updateCostumerDto: UpdateCostumerDto) {
-    return this.usersRepository.update(id, updateCostumerDto);
+  async update(id: string, updateCostumerDto: UpdateCostumerDto) {
+    return await this.costumerRepository.update(id, updateCostumerDto);
   }
 
-  remove(id: string) {
-    return this.usersRepository.softDelete(id);
+  async remove(id: string) {
+    return await this.costumerRepository.softDelete({ id });
   }
 }

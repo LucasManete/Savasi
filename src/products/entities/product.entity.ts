@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-@Entity({ name: 'costumers' })
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
+@Entity({ name: 'products' })
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -13,9 +20,12 @@ export class Product {
   @Column({ nullable: false })
   description: string;
 
-  @Column({ default: Date() })
-  createdAt: string;
+  @CreateDateColumn({ select: true })
+  createdAt: Date;
 
-  @Column({ default: Date() })
-  updatedAt: string;
+  @UpdateDateColumn({ select: true })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ select: true })
+  deletedAt: Date;
 }

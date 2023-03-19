@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
 @Entity({ name: 'costumers' })
 export class Costumer {
   @PrimaryGeneratedColumn('uuid')
@@ -25,9 +32,12 @@ export class Costumer {
   @Column({ default: false })
   isAdmin: boolean;
 
-  @Column({ default: Date() })
-  createdAt: string;
+  @CreateDateColumn({ select: true })
+  createdAt: Date;
 
-  @Column({ default: Date() })
-  updatedAt: string;
+  @UpdateDateColumn({ select: true })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ select: true })
+  deletedAt: Date;
 }
