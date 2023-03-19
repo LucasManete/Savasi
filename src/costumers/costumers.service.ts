@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCostumerDto } from './dto/create-costumer.dto';
 import { UpdateCostumerDto } from './dto/update-costumer.dto';
+import { Costumer } from './entities/costumer.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CostumersService {
+  constructor(
+    @InjectRepository(Costumer)
+    private usersRepository: Repository<Costumer>,
+  ) {}
+
   create(createCostumerDto: CreateCostumerDto) {
-    return 'This action adds a new costumer';
+    return this.usersRepository.create(createCostumerDto);
   }
 
   findAll() {
-    return `This action returns all costumers`;
+    return this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} costumer`;
+  findOne(id: string): Promise<Costumer> {
+    return this.usersRepository.findOneBy({ id });
   }
 
-  update(id: number, updateCostumerDto: UpdateCostumerDto) {
-    return `This action updates a #${id} costumer`;
+  update(id: string, updateCostumerDto: UpdateCostumerDto) {
+    return this.usersRepository.update(id, updateCostumerDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} costumer`;
+  remove(id: string) {
+    return this.usersRepository.softDelete(id);
   }
 }
