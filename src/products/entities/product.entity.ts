@@ -2,13 +2,13 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'costumers' })
 export class Product {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ nullable: false })
   name: string;
 
   @Column({ nullable: false })
-  price: string;
+  price: number;
 
   @Column({ nullable: false })
   description: string;

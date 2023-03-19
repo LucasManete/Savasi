@@ -12,7 +12,7 @@ export class CostumersService {
     private usersRepository: Repository<Costumer>,
   ) {}
 
-  create(createCostumerDto: CreateCostumerDto) {
+  async create(createCostumerDto: CreateCostumerDto): Promise<Costumer> {
     return this.usersRepository.create(createCostumerDto);
   }
 
