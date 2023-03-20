@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { CostumersService } from './costumers.service';
 import { CostumersController } from './costumers.controller';

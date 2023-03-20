@@ -7,6 +7,7 @@ import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
 import { Request } from './requests/entities/request.entity';
 import { RequestsModule } from './requests/requests.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { RequestsModule } from './requests/requests.module';
     ProductsModule,
     CostumersModule,
     RequestsModule,
+    AuthModule,
   ],
 })
 export class AppModule {
