@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable max-classes-per-file */
 export class BadRequestException extends Error {
     error: boolean;

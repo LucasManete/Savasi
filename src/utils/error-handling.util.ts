@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { UnauthorizedException, ForbiddenException, NotFoundException, ConflictException, InternalServerErrorException, BadRequestException } from './custom-http-error.util';
 
 export function errorHandlingUtil (error) {

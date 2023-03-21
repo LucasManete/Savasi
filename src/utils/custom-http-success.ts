@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export const Ok = ({ message, data }) => ({
     error: false,
     statusCode: 200,

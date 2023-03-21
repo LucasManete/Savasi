@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { Costumer } from 'src/costumers/entities/costumer.entity';
 import { AuthService } from './auth.service';

@@ -1,3 +1,4 @@
+import { Request } from 'src/requests/entities/request.entity';
 import {
   Entity,
   Column,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToMany,
 } from 'typeorm';
 @Entity({ name: 'costumers' })
 export class Costumer {
@@ -40,4 +42,7 @@ export class Costumer {
 
   @DeleteDateColumn({ select: true })
   deletedAt: Date;
+
+  @OneToMany(() => Request, (request) => request.custumer, { nullable: false, eager: true })
+  request: Request[]
 }

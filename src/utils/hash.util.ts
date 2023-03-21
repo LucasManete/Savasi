@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import * as bcrypt from 'bcrypt';
 
 const saltOrRounds = 10;

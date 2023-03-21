@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 export class CreateCostumerDto {
   name: string;
   email: string;
