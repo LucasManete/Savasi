@@ -10,6 +10,7 @@ import {
     ManyToOne,
     ManyToMany,
     JoinTable,
+    JoinColumn,
   } from 'typeorm';
   @Entity({ name: 'requests' })
   export class Request {
@@ -32,6 +33,7 @@ import {
     deletedAt: Date;
 
     @ManyToOne(() => Costumer, (costumer) => costumer.id, { nullable: false, eager: false })
+    @JoinColumn({name : 'custumerId'})
     custumer: Costumer
 
     @ManyToMany(() => Product)

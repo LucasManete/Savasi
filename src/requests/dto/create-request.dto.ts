@@ -1,5 +1,7 @@
+import { Costumer } from "src/costumers/entities/costumer.entity";
+
 export class CreateRequestDto {
-  productsId: string;
-  costumerId: string;
-  totalPrice: number;
+  totalPrice: string;
+  dataDeEntrega: string;
+  custumer: Costumer;
 }

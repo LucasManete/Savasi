@@ -20,7 +20,7 @@ import { AuthModule } from './auth/auth.module';
       database: 'mbinbnbj',
       entities: [Product, Costumer, Request],
       synchronize: true,
-      logging: ['query', 'error'],
+      logging: ['error'],
     }),
     ProductsModule,
     CostumersModule,
