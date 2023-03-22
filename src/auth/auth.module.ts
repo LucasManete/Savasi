@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { Costumer } from 'src/costumers/entities/costumer.entity';
+import { Customer } from 'src/costumers/entities/costumer.entity';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,7 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.register({
     secret: 'jwtConstants.secret',
     signOptions: { expiresIn: '60s' },
-  }),TypeOrmModule.forFeature([Costumer])],
+  }),TypeOrmModule.forFeature([Customer])],
   providers: [AuthService],
   controllers: [AuthController],
 })

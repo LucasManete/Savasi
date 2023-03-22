@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Costumer } from 'src/costumers/entities/costumer.entity';
+import { Customer } from 'src/costumers/entities/costumer.entity';
 import { UnauthorizedException } from 'src/utils/custom-http-error.util';
 import { Ok } from 'src/utils/custom-http-success';
 import { errorHandlingUtil } from 'src/utils/error-handling.util';
@@ -12,8 +12,8 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
     constructor(
         private jwtService: JwtService,
-        @InjectRepository(Costumer)
-        private costumerRepository: Repository<Costumer>,
+        @InjectRepository(Customer)
+        private costumerRepository: Repository<Customer>,
     ) {}
 
     async login({ email, password }) {

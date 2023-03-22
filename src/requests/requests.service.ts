@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CostumersService } from 'src/costumers/costumers.service';
-import { Costumer } from 'src/costumers/entities/costumer.entity';
+import { ProductsService } from 'src/products/products.service';
 import { Repository } from 'typeorm';
-// import { CreateRequestDto } from './dto/create-request.dto';
+import { CreateRequestDto } from './dto/create-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
 import { Request } from './entities/request.entity';
 
@@ -15,11 +15,11 @@ export class RequestsService {
     private requestRepository: Repository<Request>,
   ) {}
   
- async create(createRequestDto: any) {
+ async create(createRequestDto): Promise<Request[]> {
 
-    createRequestDto.custumer =  await this.costumer.findOne(createRequestDto.custumer)
-    
-    return this.requestRepository.save(createRequestDto);
+    createRequestDto.customer =  await this.costumer.findOne(createRequestDto.customer)
+
+    return await this.requestRepository.save(createRequestDto)
   }
 
   findAll() {

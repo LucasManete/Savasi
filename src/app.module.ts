@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { CostumersModule } from './costumers/costumers.module';
-import { Costumer } from './costumers/entities/costumer.entity';
+import { Customer } from './costumers/entities/costumer.entity';
 import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
 import { Request } from './requests/entities/request.entity';
@@ -18,9 +18,9 @@ import { AuthModule } from './auth/auth.module';
       username: 'mbinbnbj',
       password: 'SrwTTHJQVZT0cbUYoU0YjwJ5A59-HhnD',
       database: 'mbinbnbj',
-      entities: [Product, Costumer, Request],
+      entities: [Product, Customer, Request],
       synchronize: true,
-      logging: ['error'],
+      logging: ['log','error'],
     }),
     ProductsModule,
     CostumersModule,

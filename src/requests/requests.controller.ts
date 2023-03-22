@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { RequestsService } from './requests.service';
-// import { CreateRequestDto } from './dto/create-request.dto';
+import { CreateRequestDto } from './dto/create-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
 
 @Controller('requests')
@@ -16,7 +16,7 @@ export class RequestsController {
   constructor(private readonly requestsService: RequestsService) {}
 
   @Post()
-  create(@Body() createRequestDto: any) {
+  create(@Body() createRequestDto: CreateRequestDto) {
     return this.requestsService.create(createRequestDto);
   }
 

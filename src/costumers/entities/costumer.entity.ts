@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 @Entity({ name: 'costumers' })
-export class Costumer {
+export class Customer {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -43,6 +43,6 @@ export class Costumer {
   @DeleteDateColumn({ select: true })
   deletedAt: Date;
 
-  @OneToMany(() => Request, (request) => request.custumer, { nullable: false, eager: true })
+  @OneToMany(type => Request, customer => Customer)
   request: Request[]
 }

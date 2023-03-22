@@ -1,4 +1,4 @@
-import { Costumer } from 'src/costumers/entities/costumer.entity';
+import { Customer } from 'src/costumers/entities/costumer.entity';
 import { Product } from 'src/products/entities/product.entity';
 import {
     Entity,
@@ -32,11 +32,10 @@ import {
     @DeleteDateColumn({ select: true })
     deletedAt: Date;
 
-    @ManyToOne(() => Costumer, (costumer) => costumer.id, { nullable: false, eager: false })
-    @JoinColumn({name : 'custumerId'})
-    custumer: Costumer
+    @ManyToOne(type => Customer, requests => Request, { eager: true })
+    customer: Customer
 
-    @ManyToMany(() => Product)
+    @ManyToMany(() => Product, { eager: true })
     @JoinTable()
     product: Product[]
   }
