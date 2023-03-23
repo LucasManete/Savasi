@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { errorHandlingUtil } from 'src/utils/error-handling.util';
+import { DataSource, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -10,10 +11,15 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
+    private dataSource: DataSource
   ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
-    return await this.productRepository.save(createProductDto);
+    try {
+      return await this.productRepository.save(createProductDto);
+    } catch (error) {
+      return errorHandlingUtil(error)
+    }
   }
 
   findAll(): Promise<Product[]> {
@@ -24,8 +30,21 @@ export class ProductsService {
     return this.productRepository.findOneBy({ id });
   }
 
-  update(id: string, updateProductDto: UpdateProductDto) {
-    return this.productRepository.update({ id }, updateProductDto);
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const updatedProduct =  this.productRepository.update({ id }, updateProductDto);
+
+      await queryRunner.commitTransaction();
+      return updatedProduct
+      
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+    }
+    
   }
 
   remove(id: string) {

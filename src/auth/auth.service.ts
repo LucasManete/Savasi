@@ -16,16 +16,17 @@ export class AuthService {
         private costumerRepository: Repository<Customer>,
     ) {}
 
-    async login({ email, password }) {
+    async login(loginUserDto) {
+
         try {
-          const user = await this.costumerRepository.findOneBy({ email });
-        
-          if (!user && !user.password !== password) {
+          const user = await this.costumerRepository.findOneBy({ email: loginUserDto.email });
+  
+          if (!user) {
             throw new UnauthorizedException('Credenciais inválidas ou o usuário não existe.');
           }
           
           const validCredentials = await compare({
-            password,
+            password: loginUserDto.password,
             hashedPassword: user.password,
           });
     
@@ -34,6 +35,7 @@ export class AuthService {
           }
 
           const token =  this.jwtService.sign({ user })
+
           return Ok({
             message: 'Login efetuado com sucesso!',
             data: { token },
